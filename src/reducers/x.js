@@ -1,4 +1,6 @@
-export const SET = 'z/SET';
+import getRandomNumber from '../getRandomNumber';
+
+export const SET = 'x/SET';
 
 const initialState = {
   value: null,
@@ -12,7 +14,5 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-
-const getRandomNumber = () => Math.floor(Math.random() * 10);
 
 export const set = () => ({ type: SET, value: getRandomNumber() });

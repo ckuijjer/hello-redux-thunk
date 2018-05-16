@@ -17,7 +17,7 @@ const Centered = styled('div')({
 const Calculate = ({ x, y, z, sum, calculate }) => (
   <Container>
     <Centered>
-      <Element loading={x.loading}>{x.value}</Element>
+      <Element>{x.value}</Element>
       <Element>+</Element>
       <Element loading={y.loading}>{y.value}</Element>
       <Element>+</Element>

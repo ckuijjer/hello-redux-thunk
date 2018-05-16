@@ -1,7 +1,9 @@
+import getRandomNumber from '../getRandomNumber';
+
 export const GENERATING = 'y/GENERATING';
 export const GENERATED = 'y/GENERATED';
 
-const DURATION = 2000;
+const DURATION = 4000;
 
 const initialState = {
   value: null,
@@ -18,8 +20,6 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
-
-const getRandomNumber = () => Math.floor(Math.random() * 10);
 
 export const set = () => dispatch =>
   new Promise((resolve, reject) => {

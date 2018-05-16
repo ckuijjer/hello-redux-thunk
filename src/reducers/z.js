@@ -1,7 +1,10 @@
-export const GENERATING = 'x/GENERATING';
-export const GENERATED = 'x/GENERATED';
+import getRandomNumber from '../getRandomNumber';
+import wait from '../wait';
 
-const DURATION = 4000;
+export const GENERATING = 'z/GENERATING';
+export const GENERATED = 'z/GENERATED';
+
+const DURATION = 2000;
 
 const initialState = {
   value: null,
@@ -19,14 +22,10 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const getRandomNumber = () => Math.floor(Math.random() * 10);
-
 export const set = () => async dispatch => {
   dispatch({ type: GENERATING });
 
-  await wait();
+  await wait(DURATION);
 
   dispatch({ type: GENERATED, value: getRandomNumber() });
 };
-
-const wait = () => new Promise(resolve => window.setTimeout(resolve, DURATION));
