@@ -26,6 +26,7 @@ export const set = () => dispatch =>
     dispatch({ type: GENERATING });
 
     window.setTimeout(() => {
-      dispatch({ type: GENERATED, value: getRandomNumber() }), resolve();
+      dispatch({ type: GENERATED, value: getRandomNumber() });
+      resolve();
     }, DURATION);
   });
