@@ -14,12 +14,14 @@ const Centered = styled('div')({
   justifyContent: 'center',
 });
 
-const Calculate = ({ x, y, sum, calculate }) => (
+const Calculate = ({ x, y, z, sum, calculate }) => (
   <Container>
     <Centered>
       <Element loading={x.loading}>{x.value}</Element>
       <Element>+</Element>
       <Element loading={y.loading}>{y.value}</Element>
+      <Element>+</Element>
+      <Element loading={z.loading}>{z.value}</Element>
       <Element>=</Element>
       <Element loading={sum.loading}>{sum.value}</Element>
     </Centered>
@@ -29,9 +31,10 @@ const Calculate = ({ x, y, sum, calculate }) => (
   </Container>
 );
 
-const mapStateToProps = ({ x, y, sum }) => ({
+const mapStateToProps = ({ x, y, z, sum }) => ({
   x,
   y,
+  z,
   sum,
 });
 

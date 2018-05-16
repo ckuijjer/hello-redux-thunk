@@ -1,5 +1,6 @@
 import { set as setX } from './x';
 import { set as setY } from './y';
+import { set as setZ } from './z';
 
 export const GENERATING = 'sum/GENERATING';
 export const GENERATED = 'sum/GENERATED';
@@ -20,12 +21,12 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export const set = () => (dispatch, getState) => {
+export const set = () => async (dispatch, getState) => {
   dispatch({ type: GENERATING });
 
-  Promise.all([dispatch(setX()), dispatch(setY())]).then(() => {
-    const { x, y } = getState();
+  await Promise.all([dispatch(setX()), dispatch(setY()), dispatch(setZ())]);
 
-    dispatch({ type: GENERATED, value: x.value + y.value });
-  });
+  const { x, y, z } = getState();
+
+  dispatch({ type: GENERATED, value: x.value + y.value + z.value });
 };

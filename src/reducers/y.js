@@ -1,7 +1,7 @@
 export const GENERATING = 'y/GENERATING';
 export const GENERATED = 'y/GENERATED';
 
-const DURATION = 4000;
+const DURATION = 2000;
 
 const initialState = {
   value: null,

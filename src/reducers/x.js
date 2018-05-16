@@ -21,11 +21,12 @@ export default function reducer(state = initialState, action = {}) {
 
 const getRandomNumber = () => Math.floor(Math.random() * 10);
 
-export const set = () => dispatch =>
-  new Promise((resolve, reject) => {
-    dispatch({ type: GENERATING });
+export const set = () => async dispatch => {
+  dispatch({ type: GENERATING });
 
-    window.setTimeout(() => {
-      dispatch({ type: GENERATED, value: getRandomNumber() }), resolve();
-    }, DURATION);
-  });
+  await wait();
+
+  dispatch({ type: GENERATED, value: getRandomNumber() });
+};
+
+const wait = () => new Promise(resolve => window.setTimeout(resolve, DURATION));
