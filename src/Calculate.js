@@ -6,6 +6,7 @@ import Element from './Element';
 import Button from './Button';
 
 import { set } from './reducers/sum';
+import { pause, resume } from './reducers/timing';
 
 const Container = styled('div')({});
 
@@ -14,7 +15,7 @@ const Centered = styled('div')({
   justifyContent: 'center',
 });
 
-const Calculate = ({ x, y, z, sum, calculate }) => (
+const Calculate = ({ x, y, z, sum, calculate, paused, toggle }) => (
   <Container>
     <Centered>
       <Element>{x.value}</Element>
@@ -27,19 +28,37 @@ const Calculate = ({ x, y, z, sum, calculate }) => (
     </Centered>
     <Centered>
       <Button onClick={() => calculate()}>Calculate</Button>
+      <Button onClick={() => toggle()}>{paused ? '▶️' : '⏸'} </Button>
     </Centered>
   </Container>
 );
 
-const mapStateToProps = ({ x, y, z, sum }) => ({
+const mapStateToProps = ({ x, y, z, sum, timing }) => ({
   x,
   y,
   z,
   sum,
+  paused: timing.paused,
 });
 
 const mapDispatchToProps = dispatch => ({
   calculate: () => dispatch(set()),
+  dispatch,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calculate);
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+  const { paused } = stateProps;
+  const action = paused ? resume : pause;
+
+  return {
+    ...ownProps,
+    ...stateProps,
+    ...dispatchProps,
+    toggle: () => dispatch(action()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  Calculate
+);
