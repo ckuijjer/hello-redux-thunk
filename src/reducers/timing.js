@@ -11,7 +11,7 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, paused: true };
 
     case RESUME:
-      return { ...state, paused: false, pausedActions: [] };
+      return { ...state, paused: false };
 
     default:
       return state;

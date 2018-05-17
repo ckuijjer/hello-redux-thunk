@@ -1,25 +1,27 @@
 import { PAUSE, RESUME } from './reducers/timing';
 
-let pausedActions = [];
+let isPaused = false;
+let queue = [];
 
 const timingMiddleware = store => next => action => {
-  if (action.type === PAUSE) return next(action);
-
-  if (action.type === RESUME) {
-    console.log('resuming...');
-    pausedActions.forEach(a => {
-      console.log('resuming', a);
-      next(a);
-    });
-    pausedActions = [];
+  if (action.type === PAUSE) {
+    isPaused = true;
     return next(action);
   }
 
-  const { timing } = store.getState();
+  if (action.type === RESUME) {
+    isPaused = false;
 
-  if (timing.paused) {
-    console.log('adding', action);
-    pausedActions.push(action);
+    queue.forEach(a => {
+      next(a);
+    });
+    queue = [];
+
+    return next(action);
+  }
+
+  if (isPaused) {
+    queue.push(action);
   } else {
     return next(action);
   }
