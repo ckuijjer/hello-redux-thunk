@@ -1,18 +1,18 @@
-import getRandomNumber from '../getRandomNumber';
+import getRandomNumber from '../getRandomNumber'
 
-export const SET = 'x/SET';
+export const SET = 'x/SET'
 
 const initialState = {
   value: null,
-};
+}
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET:
-      return { value: action.value };
+      return { value: action.value }
     default:
-      return state;
+      return state
   }
 }
 
-export const set = () => ({ type: SET, value: getRandomNumber() });
+export const set = () => ({ type: SET, value: getRandomNumber() })

@@ -1,8 +1,8 @@
-import x from './x';
-import y from './y';
-import z from './z';
-import sum from './sum';
-import timing from './timing';
+import x from './x'
+import y from './y'
+import z from './z'
+import sum from './sum'
+import timing from './timing'
 
 const reducers = {
   x,
@@ -10,6 +10,6 @@ const reducers = {
   z,
   sum,
   timing,
-};
+}
 
-export default reducers;
+export default reducers

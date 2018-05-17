@@ -1,10 +1,10 @@
-let counter = 0;
+let counter = 0
 
 const actionCountingMiddleware = store => next => action => {
-  if (!action.meta) action.meta = {};
-  action.meta.count = counter++;
+  if (!action.meta) action.meta = {}
+  action.meta.count = counter++
 
-  return next(action);
-};
+  return next(action)
+}
 
-export default actionCountingMiddleware;
+export default actionCountingMiddleware

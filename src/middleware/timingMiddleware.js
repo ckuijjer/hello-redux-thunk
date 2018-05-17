@@ -1,33 +1,33 @@
-import { PAUSE, RESUME } from '../reducers/timing';
+import { PAUSE, RESUME } from '../reducers/timing'
 
-let isPaused = false;
-let queue = [];
+let isPaused = false
+let queue = []
 
 const timingMiddleware = store => next => action => {
   if (action.type === PAUSE) {
-    isPaused = true;
-    return next(action);
+    isPaused = true
+    return next(action)
   }
 
   if (action.type === RESUME) {
-    isPaused = false;
+    isPaused = false
 
     queue.forEach(a => {
-      next(a);
-    });
-    queue = [];
+      next(a)
+    })
+    queue = []
 
-    return next(action);
+    return next(action)
   }
 
   if (isPaused) {
-    queue.push(action);
+    queue.push(action)
   } else {
-    return next(action);
+    return next(action)
   }
-};
+}
 
-export default timingMiddleware;
+export default timingMiddleware
 
 // Planned solution
 // - when paused, all actionCreators (simple and thunk) are paused
