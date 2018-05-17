@@ -12,13 +12,15 @@ const countActionsMiddleware = () => {
   let counter = 0;
 
   return store => next => action => {
-    action.count = counter++;
+    if (!action.meta) action.meta = {};
+    action.meta.count = counter++;
+
     return next(action);
   };
 };
 
 const loggingMiddleware = prefix => store => next => action => {
-  console.log(action.count, prefix, action);
+  console.log(action.meta.count, prefix, action);
   return next(action);
 };
 

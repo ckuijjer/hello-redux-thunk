@@ -1,6 +1,9 @@
 import { set as setX } from './x';
 import { set as setY } from './y';
 import { set as setZ } from './z';
+import wait from '../wait';
+
+const DURATION = 3000;
 
 export const GENERATING = 'sum/GENERATING';
 export const GENERATED = 'sum/GENERATED';
@@ -23,6 +26,8 @@ export default function reducer(state = initialState, action = {}) {
 
 export const set = () => async (dispatch, getState) => {
   dispatch({ type: GENERATING });
+
+  await wait(DURATION);
 
   await Promise.all([dispatch(setX()), dispatch(setY()), dispatch(setZ())]);
 
