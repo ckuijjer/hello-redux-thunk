@@ -1,4 +1,4 @@
-import { PAUSE, RESUME } from './reducers/timing';
+import { PAUSE, RESUME } from '../reducers/timing';
 
 let isPaused = false;
 let queue = [];

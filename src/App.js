@@ -5,30 +5,17 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducer from './reducers';
-import timingMiddleware from './timingMiddleware';
+import timingMiddleware from './middleware/timingMiddleware';
+import loggingMiddleware from './middleware/loggingMiddleware';
+import actionCountingMiddleware from './middleware/actionCountingMiddleware';
+
 import Calculate from './Calculate';
-
-const countActionsMiddleware = () => {
-  let counter = 0;
-
-  return store => next => action => {
-    if (!action.meta) action.meta = {};
-    action.meta.count = counter++;
-
-    return next(action);
-  };
-};
-
-const loggingMiddleware = prefix => store => next => action => {
-  console.log(action.meta.count, prefix, action);
-  return next(action);
-};
 
 const store = createStore(
   combineReducers(reducer),
   composeWithDevTools(
     applyMiddleware(
-      countActionsMiddleware(),
+      actionCountingMiddleware,
       loggingMiddleware('1️⃣'),
       timingMiddleware,
       loggingMiddleware('2️⃣'),
